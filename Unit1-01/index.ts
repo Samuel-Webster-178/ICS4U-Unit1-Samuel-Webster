@@ -21,9 +21,9 @@ import { createPrompt } from 'bun-promptx'
 console.log('Choose the length of the logs you would like to move with a truck.')
 const lengthString = createPrompt('Choose a maple log length from among 0.25m, 0.5m, and 1m: ')
 
-let lengthNumber = parseInt(lengthString.value)
+const lengthNumber = parseInt(lengthString.value)
 
-let logNumber = 55 / lengthNumber
+const logNumber = 55 / lengthNumber
 
 console.log(`The truck can carry ${logNumber} that are ${lengthNumber} long.`)
 
