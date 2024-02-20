@@ -18,9 +18,9 @@ if (isNaN(massFloat) || massFloat < 0) {
   console.log("Invalid input.")
 } else {
   // process
-  const energy = massFloat * Math.pow(speedOfLight, 2)
+  const energy = (massFloat * Math.pow(speedOfLight, 2)).toExponential()
   // output
-  console.log(`The object with mass of ${massFloat} kg is comprised of ${energy.toFixed(3)} KJ.`)
+  console.log(`The object with mass of ${massFloat} kg is comprised of ${energy} KJ.`)
 }
 
 console.log("\nDone.")
