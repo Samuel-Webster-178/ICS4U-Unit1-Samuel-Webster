@@ -16,7 +16,6 @@ const foodType = createSelection([
 ], {
   headerText: 'Choose a type of food',
 })
-console.log(foodType.selectedIndex)
 const foodQuantity = createSelection([
   { text: 1},
   { text: 2},
