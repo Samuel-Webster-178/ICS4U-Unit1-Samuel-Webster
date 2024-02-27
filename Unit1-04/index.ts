@@ -1,55 +1,36 @@
 /*
- * This is a program that calculates the area of a circle.
- *
- * @author  Samuel Webster
- * @version 1.0
- * @since   2024-01-01
- */
+* This is a program that calculates the area of a circle.
+*
+* @author  Samuel Webster
+* @version 1.0
+* @since   2024-01-01
+*/
+
 
 import { createSelection } from 'bun-promptx'
+let guess = { selectedIndex: -1, error: null } 
+const dicerole = Math.floor(Math.random() * 6)
+let guesses = 0
 
-// input
-const foodType = createSelection([
-  { text: 'sub'},
-  { text: 'pizza'},
-  { text: 'soup'},
-], {
-  headerText: 'Choose a type of food',
-})
-const foodQuantity = createSelection([
-  { text: 1},
-  { text: 2},
-  { text: 3},
-], {
-  headerText: 'Choose a quantity',
-})
-foodQuantity.selectedIndex += 1
+do {
+  guess = createSelection([
+    { text: 1},
+    { text: 2},
+    { text: 3},
+    { text: 4},
+    { text: 5},
+    { text: 6},
+  ], {
+    headerText: 'Guess the dicerole',
+  })
+  guesses += 1
+  if (guess.selectedIndex > dicerole) {
+    console.log("Too high")
+  } else if (guess.selectedIndex < dicerole) {
+    console.log("Too low")
+  }
+} while (guess.selectedIndex != dicerole)
 
-// error checking
-let time = 0
-let food = ''
-if (foodType.selectedIndex == 0) {
-  time = 60
-  food = 'sub'
-} else if (foodType.selectedIndex == 1) {
-  time = 45
-  food = 'pizza'
-} else if (foodType.selectedIndex == 2) {
-  time = 105
-  food = 'soup'
-}
-
-// process
-// if 2 pizza, time = 45 * (2 + 1) / 2
-// = 45 * 1.5
-// = 67.5
-// time = basetime + 50% * quantityInAdditionTo1
-time = time * (foodQuantity.selectedIndex + 1) / 2
-const minutes = Math.floor(time / 60)
-const seconds = time % 60
-
-// output
-console.log(`${foodQuantity.selectedIndex} ${food}(s) take ${minutes} minutes and ${seconds} seconds to cook.`)
-
+//output
+console.log(`You successfully guessed the number ${dicerole+1} in ${guesses} tries!`)
 console.log("\nDone.")
-
