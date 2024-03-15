@@ -9,7 +9,7 @@
 // get arguments
 import { readFileSync } from 'fs'
 
-function Mean (newArray: number[]) {
+function Mean (newArray) {
   // This function calculates the mean
   let mean = 0
   let sum = 0
@@ -20,7 +20,7 @@ function Mean (newArray: number[]) {
   return mean
 }
 
-function Median (sortedArray: number[]) {
+function Median (sortedArray) {
   // This function calculates the median
   let median = 0
   if (sortedArray.length % 2) {
