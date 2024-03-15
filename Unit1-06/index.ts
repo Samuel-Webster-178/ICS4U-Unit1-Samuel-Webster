@@ -20,17 +20,15 @@ function Mean (newArray: number[]) {
   return mean
 }
 
-function Median (newArray: number[]) {
+function Median (sortedArray: number[]) {
   // This function calculates the median
   let median = 0
-  let sum = 0
-  newArray.sort((a, b) => a - b) // sort array from lowest to highest
-  if (newArray.length % 2) {
-    median = Math.floor(newArray.length / 2)
+  if (sortedArray.length % 2) {
+    median = Math.floor(sortedArray.length / 2)
   } else {
     median = (
-      parseInt(newArray[newArray.length / 2]) +
-      parseInt(newArray[newArray.length / 2 - 1])
+      parseInt(newArray[sortedArray.length / 2]) +
+      parseInt(newArray[sortedArray.length / 2 - 1])
     ) / 2
   }
   return median
@@ -48,13 +46,15 @@ const file = readFileSync(process.argv[2], 'utf8')
 //console.log(file)
 
 const newArray = file.split(/\r?\n/)
-// pop EOF (empty)
-newArray.pop()
-
+// pop EOF if empty
+if (newArray[newArray.length - 1] == "") {
+  newArray.pop()
+}
+const sortedArray = newArray.sort((a, b) => a - b) //sort low to high
 // process
 console.log(newArray)
 let mean = Mean(newArray)
-let median = Median(newArray)
+let median = Median(sortedArray)
 
 console.log("\nMean:", mean)
 console.log("Median:", median)
