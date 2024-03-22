@@ -9,8 +9,13 @@
 import { writeFileSync } from "fs"
 import { readFileSync } from 'fs'
 
-function distributeMarks() {
-  
+function distributeMarks(students: string[], assignments: string[]) {
+  let marks: number[][]
+  for (var i = 0; i < students.length; i++) {
+    for (var j = 0; j < assignments.length; j++) {
+      marks[i][j] = generateGaussian(75, 10)
+    }
+  }
 }
 
 function generateGaussian(mean: number ,std: number) {
@@ -25,15 +30,32 @@ function generateGaussian(mean: number ,std: number) {
   return z0 * std + mean;
 }
 
-let sum = 0
-let numbers = ''
+let file = readFileSync(process.argv[2], 'utf8')
 
-// Generate 10,000 Gaussian random numbers
-for (var i = 0; i < 100; i++) {
-  const normalNumber = generateGaussian(75, 10)
-  sum = sum + normalNumber
-  numbers = numbers + normalNumber + '\n'
-  console.log(normalNumber)
+const students = file.split(/\r?\n/)
+// pop EOF if empty
+if (students[students.length - 1] == "") {
+  students.pop()
 }
 
+let file = readFileSync(process.argv[2], 'utf8')
+const assignments = file.split(/\r?\n/)
+// pop EOF if empty
+if (assignments[assignments.length - 1] == "") {
+  assignments.pop()
+}
 
+const marks = distributeMarks(students, assignments)
+
+csvstring = "Name"
+for (var i = 0; i < assignments.length; i++) {
+  csvstring = csvstring + "," + assignments[i]
+}
+for (var i = 0; i < students.length; i++) {
+  csvstring = csvstring + '\n' + students[i] + ","
+  for (var j = 0; j < assignments.length; j++) {
+    csvstring = csvstring + marks[i][j] + ","
+  }
+}
+
+writeFileSync("Marks.csv", csvstring)
