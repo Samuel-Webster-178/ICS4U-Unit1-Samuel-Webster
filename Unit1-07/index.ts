@@ -9,15 +9,6 @@
 import { writeFileSync } from "fs"
 import { readFileSync } from 'fs'
 
-function distributeMarks(students: string[], assignments: string[]) {
-  let marks: number[][]
-  for (var i = 0; i < students.length; i++) {
-    for (var j = 0; j < assignments.length; j++) {
-      marks[i][j] = generateGaussian(75, 10)
-    }
-  }
-}
-
 function generateGaussian(mean: number ,std: number) {
   // https://discourse.psychopy.org/t/javascript-gaussian-function/17724/2
   var _2PI = Math.PI * 2;
@@ -30,6 +21,17 @@ function generateGaussian(mean: number ,std: number) {
   return z0 * std + mean;
 }
 
+function distributeMarks(students: string[], assignments: string[]) {
+  let marks: number[][] = []
+  for (var i = 0; i < students.length; i++) {
+    marks[i] = []
+    for (var j = 0; j < assignments.length; j++) {
+      marks[i][j] = generateGaussian(75, 10)
+    }
+  }
+  return marks
+}
+
 let file = readFileSync(process.argv[2], 'utf8')
 
 const students = file.split(/\r?\n/)
@@ -38,16 +40,16 @@ if (students[students.length - 1] == "") {
   students.pop()
 }
 
-let file = readFileSync(process.argv[2], 'utf8')
+file = readFileSync(process.argv[3], 'utf8')
 const assignments = file.split(/\r?\n/)
 // pop EOF if empty
 if (assignments[assignments.length - 1] == "") {
   assignments.pop()
 }
 
-const marks = distributeMarks(students, assignments)
+const marks: number[][] = distributeMarks(students, assignments)
 
-csvstring = "Name"
+let csvstring = "Name"
 for (var i = 0; i < assignments.length; i++) {
   csvstring = csvstring + "," + assignments[i]
 }
