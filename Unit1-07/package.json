@@ -7,5 +7,9 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "eslint": "^8.57.0",
+    "eslint-plugin-jsdoc": "^48.2.1"
   }
 }
