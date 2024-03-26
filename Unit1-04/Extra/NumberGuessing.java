@@ -70,7 +70,8 @@ final class NumberGuessing {
                 } else {
                     // output
                     System.out.println(
-                        `You successfully guessed the number ${dicerole+1} in ${guesses} tries`
+                        "You successfully guessed the number "
+                        + dicerole + " in " + guesses + " tries"
                     );
                     break;
                 }
