@@ -32,7 +32,7 @@ final class NumberGuessing {
     * @param args No args will be used
     */
     public static void main(String[] args) {
-        // constants & variables
+        // variables
         final Scanner scanner = new Scanner(System.in);
         final Random random = new Random();
         final int dicerole = random.nextInt(6) + 1;
@@ -42,7 +42,7 @@ final class NumberGuessing {
         int inputInt = 0;
 
         while (true) {
-            // input and error check
+            // input
             boolean validInput = false;
             try {
                 System.out.print("Guess the dicerole: ");
