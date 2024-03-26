@@ -41,14 +41,14 @@ final class Statistics {
     * @param arrayOfIntegers the collection of integers
     * @return the mean of the integers
     */
-    public static double mean(final Integer[] arrayOfIntegers) {
-        double mean = 0
-        int sum = 0
+    public static double mean(final Float[] arrayOfIntegers) {
+        double mean = 0;
+        float sum = 0;
         for (int counter1 = 0; counter1 < arrayOfIntegers.length; counter1++) {
-            sum += parseFloat(arrayOfIntegers[counter1])
+            sum += arrayOfIntegers[counter1];
         }
-        mean = sum / arrayOfIntegers.length 
-        return mean
+        mean = sum / arrayOfIntegers.length;
+        return mean;
     }
 
     /**
@@ -57,18 +57,19 @@ final class Statistics {
     * @param arrayOfIntegers the collection of integers
     * @return the median of the integers
     */
-    public static double median(final Integer[] arrayOfIntegers) {
-        double median = 0
-        Integer[] sortedArray = Arrays.sort(arrayOfIntegers)
-        if (sortedArray.length % 2) {
-            median = Math.floor(sortedArray.length / 2)
+    public static double median(final Float[] arrayOfIntegers) {
+        double median = 0;
+        Float[] sortedArray = arrayOfIntegers;
+        Arrays.sort(sortedArray);
+        if (sortedArray.length % 2 != 0) {
+            median = Math.floor(sortedArray.length / 2);
         } else {
             median = (
-                parseInt(sortedArray[sortedArray.length / 2]) +
-                parseInt(sortedArray[sortedArray.length / 2 - 1])
-            ) / 2
+                sortedArray[sortedArray.length / 2] +
+                sortedArray[sortedArray.length / 2 - 1]
+            ) / 2;
         }
-        return median
+        return median;
     }
 
     /**
@@ -77,8 +78,8 @@ final class Statistics {
     * @param args No args will be used
     */
     public static void main(final String[] args) {
-        Integer tempNumber;
-        final ArrayList<Integer> listOfNumbers = new ArrayList<Integer>();
+        Float tempNumber;
+        final ArrayList<Float> listOfNumbers = new ArrayList<Float>();
         final Path filePath = Paths.get("../", args[0]);
         final Charset charset = Charset.forName("UTF-8");
 
@@ -86,14 +87,14 @@ final class Statistics {
                                      filePath, charset)) {
             String line = null;
             while ((line = reader.readLine()) != null) {
-                tempNumber = Integer.parseInt(line);
+                tempNumber = Float.parseFloat(line);
                 listOfNumbers.add(tempNumber);
             }
         } catch (IOException errorCode) {
             System.err.println(errorCode);
         }
 
-        final Integer[] arrayOfNumbers = listOfNumbers.toArray(new Integer[0]);
+        final Float[] arrayOfNumbers = listOfNumbers.toArray(new Float[0]);
         System.out.println(Arrays.toString(arrayOfNumbers));
 
         System.out.println("\nCalculating stats...");
